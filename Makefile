@@ -1,17 +1,22 @@
-NAME = libftprintf.a
-FLAG = -Wall -Wextra -Werror
-SRC = $(shell find . -name "ft_*.c")
+NAME		=	libftprintf.a
+SRC			=	ft_printf.c ft_printf_utils.c
+OBJ			=	$(SRC:.c=.o)
+CC			=	gcc
+CFLAGS		=	-Wall -Werror -Wextra
+RM			=	rm -rf
+AR			=	ar rcs
 
-all: $(NAME)
+all:$(NAME)
 
-$(NAME):
-	gcc $(FLAG) -c $(SRC)
-	ar rc $(NAME) *.o
+$(NAME):$(OBJ)
+	$(AR) $(NAME) $(OBJ)
+
 clean:
-	/bin/rm -f  *.o
-fclean: clean
-	/bin/rm -f $(NAME)
+	$(RM) $(OBJ)
 
-re: fclean all
+fclean:	clean
+	$(RM) $(NAME)
 
-.PHONY: all bonus clean fclean re
+re:	fclean all
+
+.PHONY:	all clean fclean re
